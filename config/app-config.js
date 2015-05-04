@@ -1,14 +1,16 @@
+var express = require('express'),
+    bodyParser = require('body-parser'),
+    routes = require('./../app/routes/findJobs.route');
+
+
 module.exports = (function() {
-
   'use strict';
-
-  var express = require('express');
-
-  var bodyParser = require('body-parser');
 
   var app = express();
 
   var router = express.Router();
+
+  routes(router);
 
   app
     .use(bodyParser.json())
