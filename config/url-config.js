@@ -1,15 +1,12 @@
-var today = new Date();
-
-var year = today.getFullYear();
-
-var month = today.getMonth() + 1;
-
 module.exports = {
 
-  remote: 'http://whereis-whoishiring-hiring.me/city/' + year + '/' + month + '/REMOTE',
+  remote: 'http://whereis-whoishiring-hiring.me/city/' + (new Date().getFullYear()) +
+  '/' + (new Date().getMonth() + 1) + '/REMOTE',
 
-  sanFran: 'http://whereis-whoishiring-hiring.me/city/' + year + '/' + month + '/San%20Francisco',
+  sanFran: 'http://whereis-whoishiring-hiring.me/city/' + (new Date().getFullYear()) +
+  '/' + (new Date().getMonth() + 1) + '/San%20Francisco',
 
-  newYork: 'http://whereis-whoishiring-hiring.me/city/' + year + '/' + month + '/New%20York%20City'
+  newYork: 'http://whereis-whoishiring-hiring.me/city/' + (new Date().getFullYear()) +
+  '/' + (new Date().getMonth() + 1) + '/New%20York%20City'
 
 };
