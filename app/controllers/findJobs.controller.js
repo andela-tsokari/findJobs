@@ -7,7 +7,9 @@ var urls = require('./../../config/url-config'),
 
 var techs, techStr, source, description, $;
 
-techs = ['Ruby', 'JS', 'JavaScript', 'Node', 'Angular', 'Mongo', 'Mongodb', 'Python', 'Javascript'];
+techs = ['Ruby', 'JS', 'JavaScript', 'Node', 'Angular', 'Mongo', 'Mongodb',
+'Python', 'Javascript', 'MEAN Stack', 'Android', 'iOS', 'Swift', 'PHP', 'Django',
+'Clojure', 'Scala'];
 
 module.exports = {
 
@@ -28,7 +30,7 @@ module.exports = {
 
             var $$ = cheerio.load(job);
 
-            source = $$('p.job-splitter > a').attr('href');
+            source = $$('p.originalPost > a').attr('href');
 
             description = $$('span.comment').text();
 
@@ -61,12 +63,12 @@ module.exports = {
                       Full_Description: details.description
                     })
                     .save()
-                    .then(function() {
+                    .then(function(savedJobs) {
                       // console.log(savedJobs);
                     });
                 }
                 else {
-                  // console.log(savedJobs);
+                  // console.log(dbJob);
                 }
 
               });
@@ -110,7 +112,7 @@ module.exports = {
 
             var $$ = cheerio.load(job);
 
-            source = $$('p.job-splitter > a').attr('href');
+            source = $$('p.originalPost > a').attr('href');
 
             description = $$('span.comment').text();
 
@@ -143,12 +145,12 @@ module.exports = {
                       Full_Description: details.description
                     })
                     .save()
-                    .then(function() {
+                    .then(function(savedJobs) {
                       // console.log(savedJobs);
                     });
                 }
                 else {
-                  // console.log(savedJobs);
+                  // console.log(dbJob);
                 }
 
               });
@@ -189,7 +191,7 @@ module.exports = {
 
             var $$ = cheerio.load(job);
 
-            source = $$('p.job-splitter > a').attr('href');
+            source = $$('p.originalPost > a').attr('href');
 
             description = $$('span.comment').text();
 
@@ -222,10 +224,12 @@ module.exports = {
                       Full_Description: details.description
                     })
                     .save()
-                    .then(function() {
+                    .then(function(savedJobs) {
+                      // console.log(savedJobs);
                     });
                 }
                 else {
+                  // console.log(dbJob);
                 }
 
               });
