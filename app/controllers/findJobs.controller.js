@@ -7,9 +7,9 @@ var urls = require('./../../config/url-config'),
 
 var techs, techStr, source, description, $;
 
-techs = ['Ruby', 'JS', 'JavaScript', 'Node', 'Angular', 'Mongo', 'Mongodb',
-'Python', 'Javascript', 'MEAN Stack', 'Android', 'iOS', 'Swift', 'PHP', 'Django',
-'Clojure', 'Scala'];
+techs = ['Ruby', 'Ruby on Rails', 'Rails', 'JavaScript', 'Node', 'NodeJS',
+'Angular', 'AngularJS', 'Mongo', 'MongoDB', 'Python', 'MEAN Stack', 'Android',
+'iOS', 'Swift', 'PHP', 'Django', 'Clojure', 'Scala'];
 
 module.exports = {
 
@@ -34,44 +34,49 @@ module.exports = {
 
             description = $$('span.comment').text();
 
-            techStr = '';
+            techStr = [];
 
             techs.forEach(function(element, index, array) {
-              if(description.search(element) !== -1) {
-                techStr = techStr + element + ', ';
+              var criteria = new RegExp('(?:\\b)?'+element+'+(?:\\b)?', 'igm');
+
+              if(criteria.test(description) === true) {
+                techStr.push(element);
 
               }
 
             });
 
-            var details = {
-              source: source,
-              technicalRequirements: techStr,
-              description: description
+            if (techStr.length > 0) {
+              var details = {
+                source: source,
+                technicalRequirements: techStr.join(', '),
+                description: description
 
-            };
+              };
 
-            remoteJobs
-              .where({Source: details.source})
-              .fetch()
-              .then(function(dbJob) {
-                if(!dbJob) {
-                  remoteJobs
-                    .forge({
-                      Source: details.source,
-                      Technical_Requirements: details.technicalRequirements,
-                      Full_Description: details.description
-                    })
-                    .save()
-                    .then(function(savedJobs) {
-                      // console.log(savedJobs);
-                    });
-                }
-                else {
-                  // console.log(dbJob);
-                }
+              remoteJobs
+                .where({Source: details.source})
+                .fetch()
+                .then(function(dbJob) {
+                  if(!dbJob) {
+                    remoteJobs
+                      .forge({
+                        Source: details.source,
+                        Technical_Requirements: details.technicalRequirements,
+                        Full_Description: details.description
+                      })
+                      .save()
+                      .then(function(savedJobs) {
+                          // console.log(savedJobs);
+                        });
+                  }
+                  else {
+                    // console.log(dbJob);
+                  }
 
-              });
+                });
+
+            }
 
 
           });
@@ -81,19 +86,20 @@ module.exports = {
             .then(function(jobs) {
               if(jobs){
                 jobs
+                  .query('orderBy', 'Job_No', 'asc')
                   .fetch()
                   .then(function(job) {
                     res
                       .json(job.toJSON());
                   });
               }
+
             });
         }
 
       });
 
   },
-
 
   getSanFranJobs: function(req, res) {
     request
@@ -116,44 +122,49 @@ module.exports = {
 
             description = $$('span.comment').text();
 
-            techStr = '';
+            techStr = [];
 
             techs.forEach(function(element, index, array) {
-              if(description.search(element) !== -1) {
-                techStr = techStr + element + ', ';
+              var criteria = new RegExp('\\b'+element+'\\b', 'igm');
+
+              if(criteria.test(description) === true) {
+                techStr.push(element);
 
               }
 
             });
 
-            var details = {
-              source: source,
-              technicalRequirements: techStr,
-              description: description
+            if (techStr.length > 0) {
+              var details = {
+                source: source,
+                technicalRequirements: techStr.join(', '),
+                description: description
 
-            };
+              };
 
-            sanFranJobs
-              .where({Source: details.source})
-              .fetch()
-              .then(function(dbJob) {
-                if(!dbJob) {
-                  sanFranJobs
-                    .forge({
-                      Source: details.source,
-                      Technical_Requirements: details.technicalRequirements,
-                      Full_Description: details.description
-                    })
-                    .save()
-                    .then(function(savedJobs) {
-                      // console.log(savedJobs);
-                    });
-                }
-                else {
-                  // console.log(dbJob);
-                }
+              sanFranJobs
+                .where({Source: details.source})
+                .fetch()
+                .then(function(dbJob) {
+                  if(!dbJob) {
+                    sanFranJobs
+                      .forge({
+                        Source: details.source,
+                        Technical_Requirements: details.technicalRequirements,
+                        Full_Description: details.description
+                      })
+                      .save()
+                      .then(function(savedJobs) {
+                          // console.log(savedJobs);
+                        });
+                  }
+                  else {
+                    // console.log(dbJob);
+                  }
 
-              });
+                });
+
+            }
 
 
           });
@@ -163,15 +174,19 @@ module.exports = {
             .then(function(jobs) {
               if(jobs){
                 jobs
+                  .query('orderBy', 'Job_No', 'asc')
                   .fetch()
                   .then(function(job) {
                     res
                       .json(job.toJSON());
                   });
               }
+
             });
         }
+
       });
+
   },
 
   getNewYorkJobs: function(req, res) {
@@ -195,62 +210,70 @@ module.exports = {
 
             description = $$('span.comment').text();
 
-            techStr = '';
+            techStr = [];
 
             techs.forEach(function(element, index, array) {
-              if(description.search(element) !== -1) {
-                techStr = techStr + element + ', ';
+              var criteria = new RegExp('\\b'+element+'\\b', 'igm');
+
+              if(criteria.test(description) === true) {
+                techStr.push(element);
 
               }
 
             });
 
-            var details = {
-              source: source,
-              technicalRequirements: techStr,
-              description: description
+            if (techStr.length > 0) {
+              var details = {
+                source: source,
+                technicalRequirements: techStr.join(', '),
+                description: description
 
-            };
+              };
 
-            nyJobs
-              .where({Source: details.source})
-              .fetch()
-              .then(function(dbJob) {
-                if(!dbJob) {
-                  nyJobs
-                    .forge({
-                      Source: details.source,
-                      Technical_Requirements: details.technicalRequirements,
-                      Full_Description: details.description
-                    })
-                    .save()
-                    .then(function(savedJobs) {
-                      // console.log(savedJobs);
-                    });
-                }
-                else {
-                  // console.log(dbJob);
-                }
+              newYorkJobs
+                .where({Source: details.source})
+                .fetch()
+                .then(function(dbJob) {
+                  if(!dbJob) {
+                    newYorkJobs
+                      .forge({
+                        Source: details.source,
+                        Technical_Requirements: details.technicalRequirements,
+                        Full_Description: details.description
+                      })
+                      .save()
+                      .then(function(savedJobs) {
+                          console.log(savedJobs);
+                        });
+                  }
+                  else {
+                    // console.log(dbJob);
+                  }
 
-              });
+                });
 
+            }
 
           });
 
-          nyJobs
+          newYorkJobs
             .fetchAll()
             .then(function(jobs) {
               if(jobs){
                 jobs
+                  .query('orderBy', 'Job_No', 'asc')
                   .fetch()
                   .then(function(job) {
                     res
                       .json(job.toJSON());
                   });
               }
+
             });
         }
+
       });
+
   }
 
 };

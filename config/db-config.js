@@ -6,7 +6,7 @@ module.exports = {
       user: 'tams',
       database: 'jobs'
     },
-    debug: true,
+    debug: false,
   },
 
   test: {
