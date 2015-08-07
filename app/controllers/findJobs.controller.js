@@ -1,7 +1,7 @@
 var urls = require('./../../config/url-config'),
     remoteJobs = require('./../models/findJobs.model')[0],
     sanFranJobs = require('./../models/findJobs.model')[1],
-    nyJobs = require('./../models/findJobs.model')[2],
+    newYorkJobs = require('./../models/findJobs.model')[2],
     request = require('request'),
     cheerio = require('cheerio');
 
